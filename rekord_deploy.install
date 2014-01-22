@@ -36,6 +36,13 @@ function rekord_deploy_update_7000() {
 
   variable_set('theme_default', $theme);
 
+  // Disable bartik.
+  db_update('system')
+    ->fields(array('status' => 0))
+    ->condition('type', 'theme')
+    ->condition('name', 'bartik')
+    ->execute();
+
   // Enable the admin theme.
   db_update('system')
     ->fields(array('status' => 1))
